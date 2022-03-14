@@ -1,0 +1,18 @@
+enabled: true
+description: Index data into ES with some fields vectorized using BERT
+routes:
+  - path: "/app-store-data/_doc"
+    method: POST
+    classify:
+      category: elasticsearch
+      acl: index
+
+envs:
+  index: app-store-data
+
+stages:
+  - id: authorize user
+    use: authorization
+  - id: index data
+    use: elasticSearchQuery
+    async: true
