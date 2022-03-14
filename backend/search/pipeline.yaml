@@ -4,7 +4,7 @@ routes:
   - path: /app-store-data/_reactivesearch
     method: POST
     classify:
-      category: reactivesearch
+      category: elasticsearch
       acl: search
 
 envs:
@@ -27,3 +27,5 @@ stages:
     use: elasticsearchQuery
     needs:
       - determine search
+    inputs:
+      path: "{{esPath}}"

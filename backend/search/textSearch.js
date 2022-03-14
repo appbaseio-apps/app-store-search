@@ -13,7 +13,7 @@ function handleRequest() {
                 }
             },
             _source: {
-                exclude: ["name_vector", "desc_vector"]
+                excludes: ["name_vector", "desc_vector"]
             }
         }
     }
