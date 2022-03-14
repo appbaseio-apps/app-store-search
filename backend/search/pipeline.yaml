@@ -1,0 +1,19 @@
+enabled: true
+description: Text or aNN based search for the app store
+routes:
+  - path: /app-store-data/_reactivesearch
+    method: POST
+    classify:
+      category: reactivesearch
+      acl: search
+
+envs:
+  bertURL: 'http://192.168.0.109:8125'
+
+stages:
+  - id: authorize user
+    use: authorization
+  - id: determine search type
+    scriptRef: "determineSearch.js"
+  - id: es query
+    use: elasticsearchQuery
