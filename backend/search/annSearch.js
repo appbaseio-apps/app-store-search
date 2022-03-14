@@ -14,7 +14,6 @@ async function handleRequest() {
                 k: 10,
                 num_candidates: 500
             },
-            fields: ["name_vector", "desc_vector"],
             _source: {
                 excludes: ["name_vector", "desc_vector"]
             }
