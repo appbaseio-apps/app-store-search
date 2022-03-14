@@ -9,7 +9,6 @@ routes:
 
 envs:
   index: app-store-data
-  method: POST
   bertURL: "http://192.168.0.109:8125"
 
 stages:
