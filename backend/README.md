@@ -18,3 +18,7 @@ Above fields are stored as `dense_vector` so that it can be easily searched in t
 ### Search Pipeline
 
 Search pipeline supports both text based search as well as aNN search. In text based, the term is matched as is using ES. In aNN, the vectorized data is utilized to provide more relatable results.
+
+## Requirements
+
+- ElasticSearch 8.1 or more (`dense_vector` is not supported in lower versions)
