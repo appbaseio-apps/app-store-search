@@ -13,7 +13,7 @@ envs:
 stages:
   - id: authorize user
     use: authorization
-  - id: determine search type
-    scriptRef: "determineSearch.js"
+  - id: text search
+    scriptRef: "textSearch.js"
   - id: es query
     use: elasticsearchQuery
