@@ -25,3 +25,5 @@ stages:
       - aNN search
   - id: es query
     use: elasticsearchQuery
+    needs:
+      - determine search
