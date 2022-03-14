@@ -15,3 +15,36 @@ The search can be done by making a **POST** request to the `/app-store-data/_rea
     "value": "sudoku app"
 }
 ```
+
+## Index
+
+The pipeline can work with any index, for the sake of example, the index in the pipeline file is set to `app-store-data`. This can be changed accordingly to the requirements.
+
+The index, however requires a mapping to be set before it is created. This mapping ensures that the fields that are being stored as vectors are of proper type (so that aNN) can run and are indexable.
+
+Following request would set the `name_vector` and the `desc_vector` field as `dense_vector` types and make them indexable with the `similarity` being set to `cosine`.
+
+```sh
+curl --location --request PUT 'https://{{host}}:{{port}}/app-store-data' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "mappings": {
+        "properties": {
+            "name_vector": {
+                "type": "dense_vector",
+                "dims": 768,
+                "index": true,
+                "similarity": "cosine"
+            },
+            "desc_vector": {
+                "type": "dense_vector",
+                "dims": 768,
+                "index": true,
+                "similarity": "cosine"
+            }
+        }
+    }
+}'
+```
+
+> In the above, change the `host` with the host and the `port` with the port where ES is listening to.
