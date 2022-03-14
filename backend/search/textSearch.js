@@ -4,10 +4,7 @@ function handleRequest() {
     if (requestBody.type.toLowerCase() == "ann") return {}
 
     return {
-        envs: {
-            ...envs,
-            path: "/app-store-data/_search"
-        },
+        esPath: "/app-store-data/_search",
         esBody: {
             query: {
                 multi_match: {

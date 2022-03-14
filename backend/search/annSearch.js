@@ -6,10 +6,7 @@ async function handleRequest() {
     const vectoredValue = await getVectorForData(requestBody.value);
 
     return {
-        envs: {
-            ...envs,
-            path: "/app-store-data/_knn_search"
-        },
+        esPath: "/app-store-data/_knn_search",
         esBody: {
             knn: {
                 field: "name_vector",
