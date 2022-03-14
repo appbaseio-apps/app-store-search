@@ -10,10 +10,19 @@ routes:
 envs:
   index: app-store-data
   method: POST
+  bertURL: "http://192.168.0.109:8125"
 
 stages:
   - id: authorize user
     use: authorization
+  - id: add vector
+    scriptRef: "addVector.js"
+    async: true
+  - id: merge vector
+    scriptRef: "mergeVector.js"
+    needs:
+      - add vector
   - id: index data
     use: elasticsearchQuery
-    async: true
+    needs:
+      - merge vector
