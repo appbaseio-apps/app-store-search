@@ -16,7 +16,7 @@ async function handleRequest() {
             },
             fields: ["name_vector", "desc_vector"],
             _source: {
-                "excludes": ["name_vector", "desc_vector"]
+                excludes: ["name_vector", "desc_vector"]
             }
         }
     }
