@@ -1,7 +1,7 @@
 enabled: true
 description: Index data into ES with some fields vectorized using BERT
 routes:
-  - path: "/app-store-data/_doc"
+  - path: /app-store-data/_doc
     method: POST
     classify:
       category: elasticsearch
@@ -9,10 +9,11 @@ routes:
 
 envs:
   index: app-store-data
+  method: POST
 
 stages:
   - id: authorize user
     use: authorization
   - id: index data
-    use: elasticSearchQuery
+    use: elasticsearchQuery
     async: true
