@@ -18,5 +18,10 @@ stages:
   - id: aNN search
     scriptRef: "annSearch.js"
     async: true
+  - id: determine search
+    scriptRef: "determineSearch.js"
+    needs:
+      - text search
+      - aNN search
   - id: es query
     use: elasticsearchQuery
