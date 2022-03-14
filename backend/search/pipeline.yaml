@@ -15,5 +15,8 @@ stages:
     use: authorization
   - id: text search
     scriptRef: "textSearch.js"
+  - id: aNN search
+    scriptRef: "annSearch.js"
+    async: true
   - id: es query
     use: elasticsearchQuery
