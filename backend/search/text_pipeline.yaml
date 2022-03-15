@@ -1,0 +1,31 @@
+enabled: true
+description: Text or aNN based search for the app store
+routes:
+  - path: /app-store-data-text/_reactivesearch
+    method: POST
+    classify:
+      category: elasticsearch
+      acl: search
+
+envs:
+  bertURL: ${{ BERT_URL }}
+
+stages:
+  - id: authorize user
+    use: authorization
+  - id: text search
+    scriptRef: "textSearch.js"
+  - id: determine search
+    scriptRef: "determineSearch.js"
+    needs:
+      - text search
+  - id: es query
+    use: elasticsearchQuery
+    needs:
+      - determine search
+    inputs:
+      path: "{{esPath}}"
+  - id: update response
+    scriptRef: "updateResponse.js"
+    needs:
+      - es query

@@ -1,7 +1,7 @@
 enabled: true
 description: Text or aNN based search for the app store
 routes:
-  - path: /app-store-data/_reactivesearch
+  - path: /app-store-data-ann/_reactivesearch
     method: POST
     classify:
       category: elasticsearch
@@ -13,15 +13,12 @@ envs:
 stages:
   - id: authorize user
     use: authorization
-  - id: text search
-    scriptRef: "textSearch.js"
   - id: aNN search
     scriptRef: "annSearch.js"
     async: true
   - id: determine search
     scriptRef: "determineSearch.js"
     needs:
-      - text search
       - aNN search
   - id: es query
     use: elasticsearchQuery

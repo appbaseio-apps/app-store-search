@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ReactiveBase, ResultCard } from '@appbaseio/reactivesearch';
+import { ReactiveBase, ResultCard, DataSearch } from '@appbaseio/reactivesearch';
 class App extends Component {
   render() {
     return (
@@ -8,11 +8,15 @@ class App extends Component {
         app="app-store-data"
         credentials="foo:bar"
       >
+        <DataSearch
+          componentId="mainSearch"
+          iconPosition="left"
+        />
         <ResultCard
           componentId="results"
           dataField="original_title"
           react={{
-            "and": []
+            "and": ["mainSearch"]
           }}
           onData={(res) => ({
             "image": res["Icon URL"],

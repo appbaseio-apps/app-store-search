@@ -12,7 +12,7 @@ async function handleRequest() {
                 field: "name_vector",
                 query_vector: vectoredValue,
                 k: 10,
-                num_candidates: 500
+                num_candidates: 17000
             },
             _source: {
                 excludes: ["name_vector", "desc_vector"]
