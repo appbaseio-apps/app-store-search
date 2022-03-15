@@ -5,6 +5,8 @@ There are two pipelines that lets users search the index in two ways:
 - text (`/app-store-data-text/_reactivesearch`)
 - aNN (`/app-store-data-ann/_reactivesearch`)
 
+### \[[Text Search](#text-search)] \[[aNN Search](#ann-search)] \[[Index](#index)] \[[Files Used](#files-used)]
+
 ## Text Search
 
 This does a basic text search on the index and returns whatever data is passed. The body expected is the one expected by `/_reactivesearch`.
@@ -19,7 +21,7 @@ The following body:
         {
             "id": "some ID",
             "value": "sudoku game",
-            includeFields: ["Name", "Description", "URL", "Icon URL"]
+            "includeFields": ["Name", "Description", "URL", "Icon URL"]
         }
     ]
 }
@@ -56,7 +58,7 @@ A ReactiveSearch JSON request like following:
         {
             "id": "some ID",
             "value": "sudoku game",
-            includeFields: ["Name", "Description", "URL", "Icon URL"]
+            "includeFields": ["Name", "Description", "URL", "Icon URL"]
         }
     ]
 }
