@@ -48,3 +48,18 @@ curl --location --request PUT 'https://{{host}}:{{port}}/app-store-data' \
 ```
 
 > In the above, change the `host` with the host and the `port` with the port where ES is listening to.
+
+### Dimension of vector fields
+
+It is important that the dimension of the vector fields are set according to the data being used in the `bert` model. It can be any of `768` or `1024`. The number should be as many there are hidden in the dataset. For example [this pretained model]() contains 768 hidden so the dimension should be set as 768:
+
+Dimension is indicated by the `dims` field.
+
+```json
+"desc_vector": {
+    "type": "dense_vector",
+    "dims": 768,
+    "index": true,
+    "similarity": "cosine"
+}
+```
