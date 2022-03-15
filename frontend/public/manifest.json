@@ -1,0 +1,9 @@
+{
+  "short_name": "App Store Search",
+  "name": "App Store Search using ReactiveSearch pipelines",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
