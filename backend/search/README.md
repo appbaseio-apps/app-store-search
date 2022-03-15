@@ -1,4 +1,4 @@
-# Search
+# Search Endpoints
 
 There are two pipelines that lets users search the index in two ways:
 
@@ -148,7 +148,7 @@ This pipeline is invoked when the `/app-store-data-ann/_reactivesearch` endpoint
 It does the following things by utilizing the pipeline stages:
 
 - **authorization**: Authorize the user credentials to make sure they are valid.
-- **convert query to vector**: This stage uses [bert-as-service]() to convert the passed query into vectors and generate a bdoy to send to ElasticSearch.
+- **convert query to vector**: This stage uses [bert-as-service](https://github.com/hanxiao/bert-as-service) to convert the passed query into vectors and generate a body to send to ElasticSearch.
 - **determine search**: Convert the search body to the request body and update the ElasticSearch path in the context
 - **elastic query**: Query ElasticSearch with the generated body and get the response
 - **cleanup response**: This will update the response with just the `hits.hits` field instead of the raw response body.
