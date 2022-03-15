@@ -8,8 +8,7 @@ routes:
       acl: index
 
 envs:
-  index: app-store-data
-  bertURL: "http://192.168.0.109:8125"
+  bertURL: ${{ BERT_URL }}
 
 stages:
   - id: authorize user
