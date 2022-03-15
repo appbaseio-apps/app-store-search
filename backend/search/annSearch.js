@@ -1,9 +1,12 @@
 async function handleRequest() {
     const requestBody = JSON.parse(context.request.body)
 
-    if (requestBody.type.toLowerCase() == "text") return {}
+    if (requestBody.query == undefined || requestBody.query.length < 1) return {}
 
-    const vectoredValue = await getVectorForData(requestBody.value);
+    const queryValue = requestBody.query[0].value
+    const includeFields = requestBody.query[0].includeFields
+
+    const vectoredValue = await getVectorForData(queryValue);
 
     return {
         esPath: "/app-store-data/_knn_search",
@@ -15,7 +18,7 @@ async function handleRequest() {
                 num_candidates: 17000
             },
             _source: {
-                excludes: ["name_vector", "desc_vector"]
+                includes: includeFields
             }
         }
     }
