@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
-import { ReactiveBase } from '@appbaseio/reactivesearch';
+import { ReactiveBase, ResultCard } from '@appbaseio/reactivesearch';
 class App extends Component {
   render() {
     return (
       <ReactiveBase
-        url="https://appbase-demo-ansible-abxiydt-arc.searchbase.io"
-        app="good-books-ds"
-        credentials="nY6NNTZZ6:27b76b9f-18ea-456c-bc5e-3a5263ebc63d"
+        url="http://localhost:8000"
+        app="app-store-data"
+        credentials="foo:bar"
       >
-        Hello from Reactive Search!
+        <ResultCard
+          componentId="results"
+          dataField="original_title"
+          react={{
+            "and": []
+          }}
+          onData={(res) => ({
+            "image": res["Icon URL"],
+            "title": res.Name,
+            "description": res["Description"],
+            "rating": res["Average User Rating"] + " ★ "
+          })}
+        />
       </ReactiveBase>
     );
   }
