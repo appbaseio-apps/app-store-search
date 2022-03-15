@@ -16,3 +16,17 @@ jobs:
           file: "./backend/index/pipeline.yaml"
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
+
+  deploy_search_pipeline:
+    runs-on: ubuntu-latest
+    name: Deploy Search Endpoint
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Deploy Pipeline
+        uses: appbaseio/pipelines-action@0.1.2
+        with:
+          url: ${{secrets.APPBASEIOURL}}
+          file: "./backend/search/pipeline.yaml"
+        env:
+          BERT_URL: ${{ secrets.BERT_URL }}
