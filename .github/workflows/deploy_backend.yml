@@ -18,9 +18,9 @@ jobs:
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
 
-  deploy_search_pipeline:
+  deploy_search_text_pipeline:
     runs-on: ubuntu-latest
-    name: Deploy Search Endpoint
+    name: Deploy Text Search Endpoint
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -28,7 +28,22 @@ jobs:
         uses: appbaseio/pipelines-action@0.1.2
         with:
           url: ${{secrets.APPBASEIOURL}}
-          file: "./backend/search/pipeline.yaml"
-          pipeline_id: "app-store-search-search"
+          file: "./backend/search/text_pipeline.yaml"
+          pipeline_id: "app-store-search-text-search"
+        env:
+          BERT_URL: ${{ secrets.BERT_URL }}
+
+  deploy_search_ann_pipeline:
+    runs-on: ubuntu-latest
+    name: Deploy aNN Search Endpoint
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Deploy Pipeline
+        uses: appbaseio/pipelines-action@0.1.2
+        with:
+          url: ${{secrets.APPBASEIOURL}}
+          file: "./backend/search/ann_pipeline.yaml"
+          pipeline_id: "app-store-search-text-search"
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
