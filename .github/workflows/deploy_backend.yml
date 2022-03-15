@@ -14,6 +14,7 @@ jobs:
         with:
           url: ${{secrets.APPBASEIOURL}}
           file: "./backend/index/pipeline.yaml"
+          pipeline_id: "app-store-search-index"
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
 
@@ -28,5 +29,6 @@ jobs:
         with:
           url: ${{secrets.APPBASEIOURL}}
           file: "./backend/search/pipeline.yaml"
+          pipeline_id: "app-store-search-search"
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
