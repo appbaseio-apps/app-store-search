@@ -151,10 +151,23 @@ It does the following things by utilizing the pipeline stages:
 - **elastic query**: Query ElasticSearch with the generated body and get the response
 - **cleanup response**: This will update the response with just the `hits.hits` field instead of the raw response body.
 
-### Why not update request body without using an extra step
+#### Why not update request body without using an extra step
 
 This question might arise. Why are we using an extra step to update the request body in the context? This is because the `convert query to vector` converts the query into vector by making an external call and this call requires this script to run `asynchronously`.
 
 According to the pipeline structure, we do not let the `async` stages update the already present stages in the context. We **do** let those stages add new data into the context.
 
 This means, the stage that has `async: true` cannot update the `context.request`, `context.response` or `context.envs`.
+
+
+### Text Pipeline
+
+This pipeline just does a text search. It utilizes prebuilt stages with a custom stage to do a basic text search on ElasticSearch.
+
+Following stages are used in this pipeline:
+
+- **authorization**: Authorize the user credentials to make sure they are valid.
+- **convert RS body to ES body**: This stage converts the ReactiveSearch body into an equivalent ElasticSearch body to make it ready for the Elastic stage.
+- **determine search**: Convert the search body to the request body and update the ElasticSearch path in the context
+- **elastic query**: Query ElasticSearch with the generated body and get the response
+- **cleanup response**: This will update the response with just the `hits.hits` field instead of the raw response body.
