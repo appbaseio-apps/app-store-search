@@ -8,6 +8,7 @@ routes:
       acl: index
 
 envs:
+  method: POST
   bertURL: ${{ BERT_URL }}
 
 stages:
