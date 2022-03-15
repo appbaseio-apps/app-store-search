@@ -91,3 +91,40 @@ will convert to the following ES query that will be run against the `app-store-d
 ```
 
 > Note that the query is searched against the `Description` and the `Name` field.
+
+
+## aNN Search
+
+This does an apromixate k-nearest Neighbour search on the data in the index. This is done by converting the query into a vector and matching that against the `Name` field's vector data that is stored in the `name_vector` field.
+
+A ReactiveSearch JSON request like following:
+
+```json
+{
+    "query": [
+        {
+            "id": "some ID",
+            "value": "sudoku game",
+            includeFields: ["Name", "Description", "URL", "Icon URL"]
+        }
+    ]
+}
+```
+
+would be converted to the following ElasticSearch body:
+
+```json
+{
+    "knn": {
+        "field": "name_vector",
+        "query_vector": [1.0, -0.2, ...],
+        "k": 10,
+        "num_candidates": 17000
+    },
+     "_source": {
+        "includes": ["Name", "Description", "URL", "Icon URL"]
+    }
+}
+```
+
+> Note that the vector value is automatically extracted from the query.value field using `bert-as-service`.
