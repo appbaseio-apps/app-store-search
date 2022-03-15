@@ -1,6 +1,6 @@
 # Search
 
-This pipeline lets users search the index in two ways:
+There are two pipelines that lets users search the index in two ways:
 
 - text (`/app-store-data-text/_reactivesearch`)
 - aNN (`/app-store-data-ann/_reactivesearch`)
@@ -53,3 +53,41 @@ Dimension is indicated by the `dims` field.
     "similarity": "cosine"
 }
 ```
+
+## Text Search
+
+This does a basic text search on the index and returns whatever data is passed. The body expected is the one expected by `/_reactivesearch`.
+
+> We will only consider the first query in the body and this will not support multiple queries.
+
+The following body:
+
+```json
+{
+    "query": [
+        {
+            "id": "some ID",
+            "value": "sudoku game",
+            includeFields: ["Name", "Description", "URL", "Icon URL"]
+        }
+    ]
+}
+```
+
+will convert to the following ES query that will be run against the `app-store-data` index:
+
+```json
+{
+    "query": {
+        "multi_match": {
+            "query": "sudoku game",
+            "fields": ["Name", "Description"]
+        }
+    },
+    "_source": {
+        "includes": ["Name", "Description", "URL", "Icon URL"]
+    }
+}
+```
+
+> Note that the query is searched against the `Description` and the `Name` field.
