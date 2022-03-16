@@ -44,6 +44,6 @@ jobs:
         with:
           url: ${{secrets.APPBASEIOURL}}
           file: "./backend/search/ann_pipeline.yaml"
-          pipeline_id: "app-store-search-text-search"
+          pipeline_id: "app-store-search-ann-search"
         env:
           BERT_URL: ${{ secrets.BERT_URL }}
