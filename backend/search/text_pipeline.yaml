@@ -8,7 +8,7 @@ routes:
       acl: search
 
 envs:
-  bertURL: ${{ BERT_URL }}
+  method: POST
 
 stages:
   - id: authorize user
