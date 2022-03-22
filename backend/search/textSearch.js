@@ -6,15 +6,23 @@ function handleRequest() {
     const queryValue = requestBody.query[0].value
     const includeFields = requestBody.query[0].includeFields
 
+    queryToPass = {
+        multi_match: {
+            query: queryValue,
+            fields: ["Name", "Description"]
+        }
+    }
+
+    if (queryValue == undefined) {
+        queryToPass = {
+            match_all: {}
+        }
+    }
+
     return {
         esPath: "/app-store-data/_search",
         esBody: {
-            query: {
-                multi_match: {
-                    query: queryValue,
-                    fields: ["Name", "Description"]
-                }
-            },
+            query: queryToPass,
             _source: {
                 includes: includeFields
             }
