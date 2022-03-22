@@ -6,6 +6,11 @@ routes:
     classify:
       category: elasticsearch
       acl: search
+  - path: /app-store-data-ann/_reactivesearch.v3
+    method: POST
+    classify:
+      category: elasticsearch
+      acl: search
 
 envs:
   method: POST
