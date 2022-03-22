@@ -3,7 +3,15 @@ function handleRequest() {
 
     if (requestBody.query == undefined || requestBody.query.length < 1) return {}
 
-    const queryValue = requestBody.query[0].value
+    var queryValue = undefined;
+    requestBody.query.every(q => {
+        if (q.value != undefined) {
+            queryValue = q.value;
+            return false;
+        }
+        return true;
+    })
+
     const includeFields = requestBody.query[0].includeFields
     const ids = requestBody.query.map(q => q.id);
 
