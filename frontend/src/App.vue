@@ -3,7 +3,7 @@
 <template>
   <div id="app">
     <ReactiveBase
-      app="app-store-data-text"
+      :app="getIndex"
       url="http://foo:bar@localhost:8000"
       :enable-appbase="true"
     >
@@ -17,7 +17,7 @@
         :enableRecentSearches="true"
       />
       <div class="search--type--toggle">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="isAnn" />
         Enable vector search
       </div>
       <ReactiveList
@@ -60,6 +60,16 @@
 import "./styles.css";
 export default {
   name: "app",
+  data() {
+    return {
+      isAnn: false,
+    };
+  },
+  computed: {
+    getIndex() {
+      return this.isAnn ? "app-store-data-ann" : "app-store-data-text";
+    },
+  },
 };
 </script>
 
