@@ -5,7 +5,7 @@ function handleRequest() {
 
     const queryValue = requestBody.query[0].value
     const includeFields = requestBody.query[0].includeFields
-    const queryID = requestBody.query[0].id;
+    const ids = requestBody.query.map(q => q.id);
 
     queryToPass = {
         multi_match: {
@@ -28,6 +28,6 @@ function handleRequest() {
                 includes: includeFields
             }
         },
-        queryId: queryID
+        queryIds: ids
     }
 }

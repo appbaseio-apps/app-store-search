@@ -2,7 +2,10 @@ function handleRequest() {
     const esResponse = JSON.parse(context.response.body);
 
     const builtResponse = {};
-    builtResponse[context.queryId] = esResponse;
+
+    context.queryIds.forEach(qId => {
+        builtResponse[qId] = esResponse;
+    })
 
     return {
         response: {
