@@ -16,6 +16,10 @@
         :enablePopularSuggestions="true"
         :enableRecentSearches="true"
       />
+      <div class="search--type--toggle">
+        <input type="checkbox" />
+        Enable vector search
+      </div>
       <ReactiveList
         componentId="SearchResult"
         dataField="['Name', 'Description']"
@@ -65,5 +69,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.search--type--toggle {
+  padding: 25px 50px;
 }
 </style>
