@@ -5,6 +5,7 @@ async function handleRequest() {
 
     const queryValue = requestBody.query[0].value
     const includeFields = requestBody.query[0].includeFields
+    const queryID = requestBody.query[0].id;
 
     const vectoredValue = await getVectorForData(queryValue);
 
@@ -20,7 +21,8 @@ async function handleRequest() {
             _source: {
                 includes: includeFields
             }
-        }
+        },
+        queryId: queryID
     }
 }
 

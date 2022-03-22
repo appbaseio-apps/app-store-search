@@ -30,3 +30,7 @@ stages:
       - determine search
     inputs:
       path: "{{esPath}}"
+  - id: update response
+    scriptRef: "updateResponse.js"
+    needs:
+      - es query
