@@ -7,12 +7,22 @@
       url="http://foo:bar@localhost:8000"
       :enable-appbase="true"
     >
+      <DataSearch
+        className="result-list-container"
+        componentId="BookSensor"
+        :dataField="['Name', 'Description']"
+        :URLParams="true"
+        :size="3"
+        :enablePopularSuggestions="true"
+        :enableRecentSearches="true"
+      />
       <ReactiveList
         componentId="SearchResult"
-        dataField="Name"
+        dataField="['Name', 'Description']"
         className="result-list-container"
         :pagination="true"
         :size="5"
+        :react="{ and: ['BookSensor'] }"
       >
         <div slot="renderItem" slot-scope="{ item }">
           <div :id="item._id" class="flex book-content" :key="item._id">
@@ -25,15 +35,6 @@
                     by <span class="authors-list">{{ item.Developer }}</span>
                   </div>
                   <div class="ratings-list flex align-center">
-                    <span class="stars">
-                      <i
-                        v-for="(item, index) in Array(
-                          item['Average User Rating']
-                        ).fill('x')"
-                        class="fas fa-star"
-                        :key="index"
-                      />
-                    </span>
                     <span class="avg-rating"
                       >({{ item["Average User Rating"] }} avg)</span
                     >
