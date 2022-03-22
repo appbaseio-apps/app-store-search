@@ -25,7 +25,7 @@
         :react="{ and: ['BookSensor'] }"
       >
         <div slot="renderItem" slot-scope="{ item }">
-          <div :id="item._id" class="flex book-content" :key="item._id">
+          <div :id="item['ID']" class="flex book-content" :key="item['ID']">
             <img :src="item['Icon URL']" alt="Icon URL" class="book-image" />
             <div class="flex column justify-center ml20">
               <div class="book-header">{{ item.Name }}</div>
