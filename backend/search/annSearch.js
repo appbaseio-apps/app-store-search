@@ -17,21 +17,29 @@ async function handleRequest() {
     const includeFields = requestBody.query[0].includeFields
     const ids = requestBody.query.map(q => q.id);
 
-    const vectoredValue = await getVectorForData(queryValue);
+    const esBodyToPass = {
+        _source: {
+            includes: includeFields
+        }
+    }
+
+    if (queryValue != undefined) {
+        const vectoredValue = await getVectorForData(queryValue);
+        esBodyToPass.knn = {
+            field: "name_vector",
+            query_vector: vectoredValue,
+            k: 10,
+            num_candidates: 3500
+        }
+    } else {
+        esBodyToPass.query = {
+            match_all: {}
+        }
+    }
 
     return {
         esPath: "/app-store-data/_knn_search",
-        esBody: {
-            knn: {
-                field: "name_vector",
-                query_vector: vectoredValue,
-                k: 10,
-                num_candidates: 3500
-            },
-            _source: {
-                includes: includeFields
-            }
-        },
+        esBody: esBodyToPass,
         queryIds: ids
     }
 }
