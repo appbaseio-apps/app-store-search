@@ -20,6 +20,7 @@ async function handleRequest() {
             includes: includeFields
         }
     }
+    var esPathToPass = "/app-store-data/_knn_search";
 
     if (queryValue != undefined) {
         const vectoredValue = await getVectorForData(queryValue);
@@ -30,13 +31,14 @@ async function handleRequest() {
             num_candidates: 3500
         }
     } else {
+        esPathToPass = "/app-store-data/_search"
         esBodyToPass.query = {
             match_all: {}
         }
     }
 
     return {
-        esPath: "/app-store-data/_knn_search",
+        esPath: esPathToPass,
         esBody: esBodyToPass,
         queryIds: ids
     }
