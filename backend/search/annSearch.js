@@ -12,8 +12,6 @@ async function handleRequest() {
         return true;
     })
 
-    if (queryValue == undefined) return {}
-
     const includeFields = requestBody.query[0].includeFields
     const ids = requestBody.query.map(q => q.id);
 
