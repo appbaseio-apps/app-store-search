@@ -4,7 +4,8 @@
   <div id="app">
     <ReactiveBase
       :app="getIndex"
-      url="http://foo:bar@localhost:8000"
+      url="https://readonly:LF*$Sst`ENR>6}J9@calm-river-nesrtpa-arc.searchbase.io"
+      :key="getIndex"
       :enable-appbase="true"
     >
       <DataSearch
