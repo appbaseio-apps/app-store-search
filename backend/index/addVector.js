@@ -11,7 +11,7 @@ async function handleRequest() {
 }
 
 async function getVectorForData(data) {
-    const url = `${context.envs.bertURL}/encode`;
+    const url = `${context.envs.bertURL}/post`;
 
 
     const response = await fetch(url, {
@@ -20,12 +20,11 @@ async function getVectorForData(data) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id: 1,
-            texts: [data],
-            is_tokenized: false
+            data: [{ text: data }],
+            execEndpoint: "/"
         })
     });
 
     const jsonResponse = JSON.parse(response);
-    return jsonResponse.result[0];
+    return jsonResponse.data[0].embedding;
 }
