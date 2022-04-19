@@ -25,7 +25,7 @@ async function handleRequest() {
     if (queryValue != undefined) {
         const vectoredValue = await getVectorForData(queryValue);
         esBodyToPass.knn = {
-            field: "desc_vector",
+            field: "name_vector",
             query_vector: vectoredValue,
             k: 10,
             num_candidates: 5000
