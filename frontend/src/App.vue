@@ -16,6 +16,7 @@
         :size="3"
         :enablePopularSuggestions="true"
         :enableRecentSearches="true"
+        :autosuggest="false"
       />
       <div class="search--type--toggle">
         <input type="checkbox" v-model="isAnn" />
