@@ -29,6 +29,7 @@
         :pagination="true"
         :size="5"
         :react="{ and: ['BookSensor'] }"
+        loader="Loading results"
       >
         <div slot="renderItem" slot-scope="{ item }">
           <div :id="item['ID']" class="flex book-content" :key="item['ID']">

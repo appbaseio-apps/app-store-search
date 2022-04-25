@@ -14,13 +14,33 @@ envs:
 stages:
   - id: authorize user
     use: authorization
-  - id: add vector
-    scriptRef: "addVector.js"
+  - id: add body for vector requests
+    scriptRef: addBody.js
+  - id: name_vector
+    use: httpRequest
     async: true
+    inputs:
+      url: "{{bertURL}}/post"
+      method: POST
+      headers:
+        "Content-Type": "application/json"
+      body: "{{nameBody}}"
+    continueOnError: false
+  - id: desc_vector
+    use: httpRequest
+    async: true
+    inputs:
+      url: "{{bertURL}}/post"
+      method: POST
+      headers:
+        "Content-Type": "application/json"
+      body: "{{descBody}}"
+    continueOnError: false
   - id: merge vector
     scriptRef: "mergeVector.js"
     needs:
-      - add vector
+      - name_vector
+      - desc_vector
   - id: index data
     use: elasticsearchQuery
     needs:
