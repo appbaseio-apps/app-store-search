@@ -41,6 +41,7 @@ stages:
     needs:
       - name_vector
       - desc_vector
+    continueOnError: false
   - id: index data
     use: elasticsearchQuery
     needs:
