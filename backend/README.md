@@ -1,10 +1,10 @@
 # Backend
 
-The backend is built on top of ReactiveSearch pipelines and [bert-as-service](https://github.com/hanxiao/bert-as-service).
+The backend is built on top of ReactiveSearch pipelines and [clip-as-service](https://clip-as-service.jina.ai/).
 
 ## How?
 
-Two pipelines are created here. One to index the data (with vectorization). One to search the vectored data. In both cases we are using the `bert-as-service` package to vectorize the input.
+Two pipelines are created here. One to index the data (with vectorization). One to search the vectored data. In both cases we are using the `clip-as-service` package to vectorize the input.
 
 ### Index Pipeline
 

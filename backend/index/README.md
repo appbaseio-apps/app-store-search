@@ -43,14 +43,14 @@ curl --location --request PUT 'https://{{host}}:{{port}}/app-store-data' \
 
 ### Dimension of vector fields
 
-It is important that the dimension of the vector fields are set according to the data being used in the `bert` model. It can be any of `768` or `1024`. The number should be as many there are hidden in the dataset. For example [this pretained model]() contains 768 hidden so the dimension should be set as 768:
+It is important that the dimension of the vector fields are set according to the data being used in the `bert` model. Since, we are using [clip-as-service](https://clip-as-service.jina.ai/) the dimension will be **512** so the mapping needs to be set in the following way:
 
 Dimension is indicated by the `dims` field.
 
 ```json
 "desc_vector": {
     "type": "dense_vector",
-    "dims": 768,
+    "dims": 512,
     "index": true,
     "similarity": "cosine"
 }
@@ -61,7 +61,7 @@ Dimension is indicated by the `dims` field.
 The endpoint is defined using a pipeline file. The pipeline consists of the following steps:
 
 - **authorization**: Authorize the user credentials to make sure they are valid.
-- **convert fields to vector**: This stage uses [bert-as-service](https://github.com/hanxiao/bert-as-service) to convert the passed `Name` and `Description` field into vectors and generate a body to send to ElasticSearch.
+- **convert fields to vector**: This stage uses [clip-as-service](https://clip-as-service.jina.ai/) to convert the passed `Name` and `Description` field into vectors and generate a body to send to ElasticSearch.
 - **merge vector**: The above generated values are merged into the request body in this stage
 - **index data**: Utilize the prebuilt `elasticsearchQuery` stage to index the data into ElasticSearch.
 
