@@ -6,8 +6,8 @@ function handleRequest() {
             ...context.request,
             body: JSON.stringify({
                 ...requestBody,
-                "desc_vector": context["desc_vector"],
-                "name_vector": context["name_vector"]
+                "desc_vector": context["desc_vector"].data[0].embedding,
+                "name_vector": context["name_vector"].data[0].embedding
             })
         }
     }
