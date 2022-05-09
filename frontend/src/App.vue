@@ -47,7 +47,9 @@
                     >
                   </div>
                 </div>
-                <span class="price">Price {{ item["Price"] }}</span>
+                <span class="description"
+                  >Description {{ item["Description"].slice(0, 120) }}</span
+                >
               </div>
             </div>
           </div>

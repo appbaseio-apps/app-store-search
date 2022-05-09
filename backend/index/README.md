@@ -24,13 +24,13 @@ curl --location --request PUT 'https://{{host}}:{{port}}/app-store-data' \
         "properties": {
             "name_vector": {
                 "type": "dense_vector",
-                "dims": 512,
+                "dims": 768,
                 "index": true,
                 "similarity": "cosine"
             },
             "desc_vector": {
                 "type": "dense_vector",
-                "dims": 512,
+                "dims": 768,
                 "index": true,
                 "similarity": "cosine"
             }
