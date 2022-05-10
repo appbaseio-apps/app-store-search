@@ -28,7 +28,7 @@ async function handleRequest() {
             field: "name_vector",
             query_vector: vectoredValue,
             k: 10,
-            num_candidates: 5000
+            num_candidates: 10000
         }
     } else {
         esPathToPass = "/app-store-data/_search"
