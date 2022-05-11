@@ -8,15 +8,16 @@
       :key="getIndex"
       :enable-appbase="true"
     >
-      <DataSearch
+      <SearchBox
         className="result-list-container"
         componentId="BookSensor"
         :dataField="['Name', 'Description']"
         :URLParams="true"
         :size="3"
-        :enablePopularSuggestions="true"
-        :enableRecentSearches="true"
+        :enablePopularSuggestions="false"
+        :enableRecentSearches="false"
         :autosuggest="false"
+        :enterButton="true"
       />
       <div class="search--type--toggle">
         <input type="checkbox" v-model="isAnn" />
@@ -47,9 +48,9 @@
                     >
                   </div>
                 </div>
-                <span class="description"
-                  >Description {{ item["Description"].slice(0, 120) }}</span
-                >
+                <span class="description">{{
+                  item["Description"].slice(0, 120)
+                }}</span>
               </div>
             </div>
           </div>
