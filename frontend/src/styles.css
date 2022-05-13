@@ -17,8 +17,10 @@ nav h2 a {
 }
 
 .content-container {
-  // text-align: center;
   padding-top: 2rem;
+}
+.loader {
+  text-align: center;
 }
 .row {
   display: flex;

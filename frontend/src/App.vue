@@ -33,7 +33,7 @@
             <input type="checkbox" v-model="isAnn" />
             <span class="slider round"></span>
           </label>
-          <div class="text">Enable {{ isAnn ? "vector" : "text" }} search</div>
+          <div class="text">{{ isAnn ? "vector" : "text" }} search</div>
         </div>
         <ReactiveList
           componentId="SearchResult"
@@ -44,7 +44,7 @@
           :react="{ and: ['BookSensor'] }"
         >
           <div slot="render" slot-scope="{ loading, error, data }">
-            <div v-if="loading">
+            <div class='loader' v-if="loading">
               <img src="https://i.imgur.com/ULLRsFw.gif" alt="searching..." />
             </div>
             <div v-if="Boolean(error)">
@@ -136,6 +136,7 @@ export default {
 
 .text {
   padding-left: 12px;
+  text-transform: uppercase;
 }
 
 .switch {
