@@ -13,10 +13,10 @@
     redux-thunk "^2.3.0"
     xdate "^0.8.2"
 
-"@appbaseio/reactivesearch-vue@1.29.0":
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/@appbaseio/reactivesearch-vue/-/reactivesearch-vue-1.29.0.tgz#da7cc03d933c7598cf354748a09be16bc49a4479"
-  integrity sha512-khvbqRnTLtNhu2FoLvpx6NA49AJr+bC4GdcYfjGAqhcZOeu8AzKrVFss1GpRtCBhNAHG/BDqLDVGhod/srni5g==
+"@appbaseio/reactivesearch-vue@1.29.0-preview.1":
+  version "1.29.0-preview.1"
+  resolved "https://registry.yarnpkg.com/@appbaseio/reactivesearch-vue/-/reactivesearch-vue-1.29.0-preview.1.tgz#f2fc634db314ee0eb159b09f68ccd33fa0a0c0b9"
+  integrity sha512-MdeJW3ZpE4RsNm2frJLgdcGyMyZj24TZGfnU9OLhNsLYVQy/26uPFyj3A4g6wNpGcLQIAdhzMnU2uL3CY112ZA==
   dependencies:
     "@appbaseio/reactivecore" "9.14.5"
     "@appbaseio/vue-emotion" "0.4.4"
