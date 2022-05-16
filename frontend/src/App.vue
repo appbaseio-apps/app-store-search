@@ -45,7 +45,7 @@
           :showResultStats="false"
         >
           <div slot="render" slot-scope="{ loading, error, data, resultStats }">
-            <div class='loader' v-if="loading">
+            <div class="loader" v-if="loading">
               <img src="https://i.imgur.com/ULLRsFw.gif" alt="searching..." />
             </div>
             <div v-if="Boolean(error)">
@@ -53,7 +53,8 @@
             </div>
             <div v-if="!loading">
               <div>
-                Found {{resultStats.numberOfResults}} results in {{resultStats.time}} seconds
+                Found {{ resultStats.numberOfResults }} results in
+                {{ resultStats.time }} seconds
               </div>
               <div v-bind:key="result._id" v-for="result in data">
                 <div
@@ -90,7 +91,10 @@
                         </div>
                       </div>
                       <span class="description">{{
-                        result["Description"].replace(/\n/g,' ').replace(/\t/g,' ').slice(0, 120)
+                        result["Description"]
+                          .replace(/\\n/g, " ")
+                          .replace(/\\t/g, " ")
+                          .slice(0, 120)
                       }}</span>
                     </div>
                   </div>
