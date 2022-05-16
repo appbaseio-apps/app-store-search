@@ -90,14 +90,19 @@
                           }}</span>
                         </div>
                       </div>
-                      <span :title="result['Description']
-                          .replace(/\\n/g, ' ')
-                          .replace(/\\t/g, ' ')" class="description">{{
-                        result["Description"]
-                          .replace(/\\n/g, " ")
-                          .replace(/\\t/g, " ")
-                         
-                      }}</span>
+                      <span
+                        :title="
+                          result['Description']
+                            .replace(/\\n/g, ' ')
+                            .replace(/\\t/g, ' ')
+                        "
+                        class="description"
+                        >{{
+                          result["Description"]
+                            .replace(/\\n/g, " ")
+                            .replace(/\\t/g, " ")
+                        }}</span
+                      >
                     </div>
                   </div>
                 </div>
