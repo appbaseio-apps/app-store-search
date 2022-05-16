@@ -90,11 +90,13 @@
                           }}</span>
                         </div>
                       </div>
-                      <span class="description">{{
+                      <span :title="result['Description']
+                          .replace(/\\n/g, ' ')
+                          .replace(/\\t/g, ' ')" class="description">{{
                         result["Description"]
                           .replace(/\\n/g, " ")
                           .replace(/\\t/g, " ")
-                          .slice(0, 120)
+                         
                       }}</span>
                     </div>
                   </div>
@@ -217,5 +219,13 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 </style>
