@@ -2,63 +2,115 @@
 
 <template>
   <div id="app">
+    <nav>
+      <h2>
+        <img src="https://i.imgur.com/FQ2o0ZH.png" alt="app-store" /> App Store
+        Search
+      </h2>
+
+      <a href="#" target="_blank">View Blog</a>
+    </nav>
     <ReactiveBase
       :app="getIndex"
       url="https://readonly:LF*$Sst`ENR>6}J9@calm-river-nesrtpa-arc.searchbase.io"
       :key="getIndex"
       :enable-appbase="true"
     >
-      <SearchBox
-        className="result-list-container"
-        componentId="BookSensor"
-        :dataField="['Name', 'Description']"
-        :URLParams="true"
-        :size="3"
-        :enablePopularSuggestions="false"
-        :enableRecentSearches="false"
-        :autosuggest="false"
-        :enterButton="true"
-      />
-      <div class="search--type--toggle">
-        <label class="switch">
-          <input type="checkbox" v-model="isAnn" />
-          <span class="slider round"></span>
-        </label>
-        <div class="text">Enable vector search</div>
-      </div>
-      <ReactiveList
-        componentId="SearchResult"
-        dataField="['Name', 'Description']"
-        className="result-list-container"
-        :pagination="true"
-        :size="5"
-        :react="{ and: ['BookSensor'] }"
-        loader="Loading results"
-      >
-        <div slot="renderItem" slot-scope="{ item }">
-          <div :id="item['ID']" class="flex book-content" :key="item['ID']">
-            <img :src="item['Icon URL']" alt="Icon URL" class="book-image" />
-            <div class="flex column justify-center ml20">
-              <div class="book-header">{{ item.Name }}</div>
-              <div class="flex column justify-space-between">
-                <div>
-                  <div>
-                    by <span class="authors-list">{{ item.Developer }}</span>
-                  </div>
-                  <div class="ratings-list flex align-center">
-                    <span class="avg-rating"
-                      >({{ item["Average User Rating"] }} avg)</span
-                    >
+      <div class="content-container">
+        <SearchBox
+          className="result-list-container"
+          componentId="q"
+          :dataField="['Name', 'Description']"
+          :URLParams="true"
+          :size="3"
+          :enablePopularSuggestions="false"
+          :enableRecentSearches="false"
+          :autosuggest="false"
+          :enterButton="true"
+        />
+        <div class="search--type--toggle">
+          <label class="switch">
+            <input type="checkbox" v-model="isAnn" />
+            <span class="slider round"></span>
+          </label>
+          <div class="text">{{ isAnn ? "vector" : "text" }} search</div>
+        </div>
+        <ReactiveList
+          componentId="SearchResult"
+          dataField="['Name', 'Description']"
+          className="result-list-container"
+          :pagination="true"
+          :size="5"
+          :react="{ and: ['q'] }"
+          :showResultStats="false"
+        >
+          <div slot="render" slot-scope="{ loading, error, data, resultStats }">
+            <div class="loader" v-if="loading">
+              <img src="https://i.imgur.com/ULLRsFw.gif" alt="searching..." />
+            </div>
+            <div v-if="Boolean(error)">
+              Something went wrong! Error details {{ JSON.stringify(error) }}
+            </div>
+            <div v-if="!loading">
+              <div>
+                Found {{ resultStats.numberOfResults }} results in
+                {{ resultStats.time }} seconds
+              </div>
+              <div v-bind:key="result._id" v-for="result in data">
+                <div
+                  :id="result['ID']"
+                  class="flex book-content"
+                  :key="result['ID']"
+                >
+                  <img
+                    :src="result['Icon URL']"
+                    alt="Icon URL"
+                    class="book-image"
+                  />
+                  <div class="flex column justify-center ml20">
+                    <div class="book-header">
+                      {{ result.Name }}
+                      <span class="stars">
+                        <span
+                          v-for="(item, index) in Array(
+                            Math.ceil(result['Average User Rating'])
+                          ).fill('x')"
+                          :key="index"
+                        >
+                          ⭐
+                        </span>
+                      </span>
+                    </div>
+                    <div class="flex column justify-space-between">
+                      <div>
+                        <div>
+                          by
+                          <span class="authors-list">{{
+                            result.Developer
+                          }}</span>
+                        </div>
+                      </div>
+                      <span
+                        :title="
+                          result['Description']
+                            .replace(/\\n/g, ' ')
+                            .replace(/\\t/g, ' ')
+                        "
+                        class="description"
+                        >{{
+                          result["Description"]
+                            .replace(/\\n/g, " ")
+                            .replace(/\\t/g, " ")
+                        }}</span
+                      >
+                    </div>
                   </div>
                 </div>
-                <span class="description">{{
-                  item["Description"].slice(0, 120)
-                }}</span>
               </div>
             </div>
           </div>
-        </div>
-      </ReactiveList>
+        </ReactiveList>
+      </div>
     </ReactiveBase>
   </div>
 </template>
@@ -69,6 +121,16 @@
 import "./styles.css";
 export default {
   name: "app",
+  metaInfo: {
+    title: "App store search demo from Reactivesearch",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Demo of kNN and text search capabilities for reactivesearch.io",
+      },
+    ],
+  },
   data() {
     return {
       isAnn: false,
@@ -93,11 +155,13 @@ export default {
 .search--type--toggle {
   display: flex;
   align-items: center;
-  padding: 25px 50px;
+  padding: 0 40px;
+  margin: 20px 0;
 }
 
 .text {
   padding-left: 12px;
+  text-transform: uppercase;
 }
 
 .switch {
@@ -160,5 +224,13 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 </style>
