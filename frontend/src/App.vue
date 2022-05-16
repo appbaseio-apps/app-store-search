@@ -19,7 +19,7 @@
       <div class="content-container">
         <SearchBox
           className="result-list-container"
-          componentId="BookSensor"
+          componentId="q"
           :dataField="['Name', 'Description']"
           :URLParams="true"
           :size="3"
@@ -41,9 +41,10 @@
           className="result-list-container"
           :pagination="true"
           :size="5"
-          :react="{ and: ['BookSensor'] }"
+          :react="{ and: ['q'] }"
+          :showResultStats="false"
         >
-          <div slot="render" slot-scope="{ loading, error, data }">
+          <div slot="render" slot-scope="{ loading, error, data, resultStats }">
             <div class='loader' v-if="loading">
               <img src="https://i.imgur.com/ULLRsFw.gif" alt="searching..." />
             </div>
@@ -51,6 +52,9 @@
               Something went wrong! Error details {{ JSON.stringify(error) }}
             </div>
             <div v-if="!loading">
+              <div>
+                Found {{resultStats.numberOfResults}} results in {{resultStats.time}} seconds
+              </div>
               <div v-bind:key="result._id" v-for="result in data">
                 <div
                   :id="result['ID']"
@@ -86,7 +90,7 @@
                         </div>
                       </div>
                       <span class="description">{{
-                        result["Description"].slice(0, 120)
+                        result["Description"].replace(/\n/g,' ').replace(/\t/g,' ').slice(0, 120)
                       }}</span>
                     </div>
                   </div>
@@ -106,6 +110,16 @@
 import "./styles.css";
 export default {
   name: "app",
+  metaInfo: {
+    title: "App store search demo from Reactivesearch",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Demo of kNN and text search capabilities for reactivesearch.io",
+      },
+    ],
+  },
   data() {
     return {
       isAnn: false,

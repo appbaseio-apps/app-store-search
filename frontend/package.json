@@ -1,5 +1,5 @@
 {
-  "name": "data-search",
+  "name": "app-store-search-by-reactivesearch-io",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@appbaseio/reactivesearch-vue": "1.29.0-preview.1",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-meta": "^2.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",
